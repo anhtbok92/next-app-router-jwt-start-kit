@@ -1,0 +1,49 @@
+{
+  "extends": "next/core-web-vitals",
+  "plugins": [
+    "@typescript-eslint"
+  ],
+  "rules": {
+    "@typescript-eslint/no-unused-vars": [
+      "warn",
+      {
+        "args": "none"
+      }
+    ],
+    "import/no-unresolved": "error",
+    "import/named": "off",
+    "no-console": "warn",
+    "indent": [
+      "error",
+      2
+    ],
+    // Thụt lề 2 khoảng trắng
+    "semi": [
+      "error",
+      "always"
+    ],
+    // Bắt buộc dấu chấm phẩy
+    "quotes": [
+      "error",
+      "single"
+    ],
+    // Dùng nháy đơn
+    "no-trailing-spaces": "error",
+    // Xóa khoảng trắng cuối dòng
+    "comma-dangle": [
+      "error",
+      "always-multiline"
+    ],
+    // Thêm dấu phẩy cuối nếu xuống dòng
+    "object-curly-spacing": [
+      "error",
+      "always"
+    ],
+    // Khoảng trắng trong dấu {}
+    "array-bracket-spacing": [
+      "error",
+      "never"
+    ]
+    // Không khoảng trắng trong []
+  }
+}
