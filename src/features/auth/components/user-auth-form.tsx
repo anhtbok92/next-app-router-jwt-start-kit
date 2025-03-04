@@ -30,7 +30,6 @@ export default function UserAuthForm() {
   const callbackUrl = searchParams.get('callbackUrl');
   const [loading, startTransition] = useTransition();
   const defaultValues = {
-    // email: 'demo@gmail.com',
     email: 'john@mail.com',
     password: 'changeme'
   };
@@ -40,13 +39,11 @@ export default function UserAuthForm() {
   });
 
   const onSubmit = async (data: UserFormValue) => {
-    console.log({ data });
     startTransition(() => {
       signIn('credentials', {
         email: data.email,
         password: data.password,
         redirectTo: callbackUrl ?? '/dashboard'
-        // callbackUrl: callbackUrl ?? '/dashboard'
       });
       toast.success('Signed In Successfully!');
     });
