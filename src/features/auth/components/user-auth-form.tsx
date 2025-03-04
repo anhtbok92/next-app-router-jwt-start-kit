@@ -7,7 +7,7 @@ import {
   FormField,
   FormItem,
   FormLabel,
-  FormMessage,
+  FormMessage
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -20,6 +20,7 @@ import * as z from 'zod';
 
 const formSchema = z.object({
   email: z.string().email({ message: 'Enter a valid email address' }),
+  password: z.string({ message: 'Enter a valid password' })
 });
 
 type UserFormValue = z.infer<typeof formSchema>;
@@ -29,18 +30,22 @@ export default function UserAuthForm() {
   const callbackUrl = searchParams.get('callbackUrl');
   const [loading, startTransition] = useTransition();
   const defaultValues = {
-    email: 'demo@gmail.com',
+    // email: 'demo@gmail.com',
+    email: 'john@mail.com',
+    password: 'changeme'
   };
   const form = useForm<UserFormValue>({
     resolver: zodResolver(formSchema),
-    defaultValues,
+    defaultValues
   });
 
   const onSubmit = async (data: UserFormValue) => {
+    console.log({ data });
     startTransition(() => {
       signIn('credentials', {
         email: data.email,
-        redirectTo: callbackUrl ?? '/dashboard',
+        password: data.password,
+        redirectTo: callbackUrl ?? '/dashboard'
         // callbackUrl: callbackUrl ?? '/dashboard'
       });
       toast.success('Signed In Successfully!');
@@ -72,9 +77,27 @@ export default function UserAuthForm() {
               </FormItem>
             )}
           />
+          <FormField
+            control={form.control}
+            name='password'
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Password</FormLabel>
+                <FormControl>
+                  <Input
+                    type='password'
+                    placeholder='Enter your password...'
+                    disabled={loading}
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
 
           <Button disabled={loading} className='ml-auto w-full' type='submit'>
-            Continue With Email
+            Continue With Email & Password
           </Button>
         </form>
       </Form>

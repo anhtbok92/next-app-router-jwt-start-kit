@@ -30,11 +30,11 @@
     // Dùng nháy đơn
     "no-trailing-spaces": "error",
     // Xóa khoảng trắng cuối dòng
-    "comma-dangle": [
-      "error",
-      "always-multiline"
-    ],
-    // Thêm dấu phẩy cuối nếu xuống dòng
+    //    "comma-dangle": [
+    //      "error",
+    //      "always-multiline"
+    //    ],
+    //    // Thêm dấu phẩy cuối nếu xuống dòng
     "object-curly-spacing": [
       "error",
       "always"
