@@ -12,11 +12,11 @@
     ],
     "import/no-unresolved": "error",
     "import/named": "off",
-    "no-console": "warn",
-    "indent": [
-      "error",
-      2
-    ],
+    "no-console": "off",
+    //    "indent": [
+    //      "error",
+    //      2
+    //    ],
     // Thụt lề 2 khoảng trắng
     "semi": [
       "error",

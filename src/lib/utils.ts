@@ -5,6 +5,16 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
+export const getBaseApiUrl = (baseType: string, version = 'v1') => {
+  const apiUrl = 'https://api.escuelajs.co/api/';
+  switch (baseType) {
+    case 'BASE_API_AUTH':
+      return `${apiUrl}/${version}/auth/login`;
+    default:
+      return `${apiUrl}/${version}/public`;
+  }
+};
+
 export function formatBytes(
   bytes: number,
   opts: {

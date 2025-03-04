@@ -10,7 +10,7 @@ interface ExtendedUser {
 const authConfig = {
   providers: [
     CredentialProvider({
-      name: 'verify with email and password',
+      name: 'Login with email and password',
       credentials: {
         email: {
           type: 'email'
@@ -20,9 +20,6 @@ const authConfig = {
         }
       },
       async authorize(credentials, req) {
-        // Call API in back-end customer in here
-        // This is mocking Back-end API
-        console.log(JSON.stringify(credentials));
         const res = await fetch('https://api.escuelajs.co/api/v1/auth/login', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -33,7 +30,6 @@ const authConfig = {
         if (!res.ok) {
           throw new Error('Invalid credentials');
         }
-
         const user = await res.json();
         const fullUser = {
           id: '1',
@@ -41,8 +37,6 @@ const authConfig = {
           email: credentials?.email as string,
           accessToken: user?.access_token
         } as ExtendedUser;
-
-        console.log({ fullUser });
         if (fullUser) {
           return fullUser;
         } else {
@@ -70,7 +64,7 @@ const authConfig = {
     }
   },
   pages: {
-    signIn: '/' //sigin page
+    signIn: '/' // Trang login là landing page
   }
 } satisfies NextAuthConfig;
 

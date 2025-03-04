@@ -1,14 +1,14 @@
 import { AxiosError, AxiosResponse, default as axios } from 'axios';
 import { getSession } from 'next-auth/react';
+import { getBaseApiUrl } from '@/lib/utils';
 
 const headers = {
   Accept: 'application/json',
   'Content-Type': 'application/json;charset=UTF-8'
 };
-const timeout = 3 * 60 * 1000; // 3minus
+const timeout = 3 * 60 * 1000; // 3 minute
 
 const setAxiosInstance = (serviceName = '', version = 'v1') => {
-  // const { data: session } = useSession();
   const axiosInstance = axios.create({
     timeout,
     headers
@@ -21,8 +21,7 @@ const setAxiosInstance = (serviceName = '', version = 'v1') => {
       const session = (await getSession()) as any;
       const token = session.accessToken;
       config.headers.Authorization = `Bearer ${token}`;
-      console.log({ serviceName, version });
-      // config.baseURL = getBaseApiUrl(serviceName, version);
+      config.baseURL = getBaseApiUrl(serviceName, version);
       return config;
     },
     function (error) {
@@ -68,5 +67,7 @@ export function responseHandling(response: AxiosResponse) {
 }
 
 const axiosInstance = setAxiosInstance();
+
+export const axiosAuthInstance = setAxiosInstance('BASE_API_AUTH', 'v1');
 
 export default axiosInstance;
